@@ -54,15 +54,12 @@ jobs:
       - name: Create Google Credentials File
         # This command takes the content of the secret and writes it to a new file.
         run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" > google_creds.json
-        shell: bash
 
       - name: Create WSJ Session File
         run: echo "${{ secrets.WSJ_SESSION_STATE }}" > session_state.json
-        shell: bash
 
       # Step 6: Run the main Python scraper script.
       - name: Run Python Scraper
-        # Pass the secrets to the script as environment variables.
         env:
           SHEET_ID: ${{ secrets.SHEET_ID }}
           GOOGLE_APPLICATION_CREDENTIALS: ./google_creds.json
