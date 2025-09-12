@@ -1,0 +1,17 @@
+.venv/
+venv/
+*.venv
+
+session_state.json
+google_creds.json
+wsj-sa.json
+
+__pycache__/
+*.pyc
+
+.DS_Store
+
+*.png
+*.log
+
+.vscode/
