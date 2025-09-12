@@ -14,7 +14,7 @@ on:
     # Nebraska is Central Time (CT), which is UTC-5 (CDT).
     # 11 PM CDT (UTC-5) is 4:00 AM UTC the next day.
     # This schedule runs at both 4 AM and 5 AM UTC to cover both standard and daylight saving time.
-    - cron: '0 4,5 * * *'
+    - cron: '0 3,4 * * *'
 
 # ---------------------------------
 # JOB CONFIGURATION
