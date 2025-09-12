@@ -53,18 +53,17 @@ jobs:
       
       - name: Create Google Credentials File
         env:
-          # Map the GitHub Secret to an environment variable named CREDENTIALS_JSON
+          # Map the GitHub Secret to an environment variable.
           CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS }}
-        run: echo "$CREDENTIALS_JSON" > google_creds.json
+        # Use Python to read the environment variable and write its content to a file.
+        run: python -c "import os; f = open('google_creds.json', 'w'); f.write(os.environ['CREDENTIALS_JSON']); f.close()"
 
       - name: Create WSJ Session File
         env:
-          # Map the GitHub Secret to an environment variable named SESSION_JSON
+          # Map the GitHub Secret to an environment variable.
           SESSION_JSON: ${{ secrets.WSJ_SESSION_STATE }}
-        run: echo "$SESSION_JSON" > session_state.json
-
-      - name: Create WSJ Session File
-        run: echo "${{ secrets.WSJ_SESSION_STATE }}" > session_state.json
+        # Use the same Python method for the session file.
+        run: python -c "import os; f = open('session_state.json', 'w'); f.write(os.environ['SESSION_JSON']); f.close()"
 
       # Step 6: Run the main Python scraper script.
       - name: Run Python Scraper
