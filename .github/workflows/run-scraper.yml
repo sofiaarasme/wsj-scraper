@@ -1,5 +1,5 @@
 # Workflow name
-name: Fetch WSJ Daily Value
+name: Fetch WSJ daily value extraction
 
 # ---------------------------------
 # TRIGGER CONFIGURATION
@@ -52,8 +52,16 @@ jobs:
       # Step 5: Create the necessary credential and session files from GitHub Secrets.
       
       - name: Create Google Credentials File
-        # This command takes the content of the secret and writes it to a new file.
-        run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" > google_creds.json
+        env:
+          # Map the GitHub Secret to an environment variable named CREDENTIALS_JSON
+          CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS }}
+        run: echo "$CREDENTIALS_JSON" > google_creds.json
+
+      - name: Create WSJ Session File
+        env:
+          # Map the GitHub Secret to an environment variable named SESSION_JSON
+          SESSION_JSON: ${{ secrets.WSJ_SESSION_STATE }}
+        run: echo "$SESSION_JSON" > session_state.json
 
       - name: Create WSJ Session File
         run: echo "${{ secrets.WSJ_SESSION_STATE }}" > session_state.json
